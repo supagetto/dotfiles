@@ -1,0 +1,13 @@
+# ┏━━━━━━━━━━━┓
+# ┃ gitconfig ┃
+# ┗━━━━━━━━━━━┛
+
+[user]
+  name = supagetto
+  email = 5up4g3tt0@gmail.com
+
+[core]
+  editor = vim
+
+[include]
+  path = ~/.config/local/.gitconfig
