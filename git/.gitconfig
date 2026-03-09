@@ -2,6 +2,9 @@
 # ┃ gitconfig ┃
 # ┗━━━━━━━━━━━┛
 
+[init]
+  defaultBranch = main
+
 [user]
   name = supagetto
   email = 5up4g3tt0@gmail.com
