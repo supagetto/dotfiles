@@ -83,6 +83,9 @@ M.opts = function()
     terminal = {
       split_width_percentage = 0.4,
       snacks_win_opts = {
+        bo = {
+          filetype = 'claudecode',
+        },
         keys = {
           open_terminal = {
             '<C-\\>',
