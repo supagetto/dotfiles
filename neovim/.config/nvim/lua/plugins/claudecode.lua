@@ -29,7 +29,7 @@ M.cmd = {
 
 M.init = function()
   require('utils').set_keymaps(
-    { 'n', '<Char-0x1e>', '<Cmd>ClaudeCode<CR>' },
+    { 'n', '<C-.>', '<Cmd>ClaudeCode<CR>' },
     { 'n', '<Leader>.f', '<Cmd>ClaudeCodeAdd %<CR>' },
     { 'v', '<Leader>.t', '<Cmd>ClaudeCodeSend<CR>' },
     { 'n', '<Leader>.t', '<cmd>.ClaudeCodeSend<CR>' },
@@ -93,7 +93,7 @@ M.opts = function()
             mode = 't',
           },
           toggle = {
-            '<Char-0x1e>',
+            '<C-.>',
             function()
               vim.cmd('stopinsert')
               vim.cmd('ClaudeCode')
