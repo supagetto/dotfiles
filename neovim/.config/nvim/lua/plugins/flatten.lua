@@ -10,6 +10,12 @@ M.lazy = false
 
 M.priority = 1001
 
-M.config = true
+M.opts = function()
+  return {
+    window = {
+      open = 'alternate',
+    },
+  }
+end
 
 return M
