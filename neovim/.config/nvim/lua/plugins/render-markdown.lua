@@ -14,13 +14,11 @@ M.opts = {
   },
   file_types = {
     'markdown',
-    'opencode_output',
   },
 }
 
 M.ft = {
   'markdown',
-  'opencode_output',
 }
 
 return M
