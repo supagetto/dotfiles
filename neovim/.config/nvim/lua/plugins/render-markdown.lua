@@ -19,4 +19,11 @@ M.ft = {
   'markdown',
 }
 
+M.init = function()
+  require('utils').set_keymaps(
+    { 'n', '<Leader>tm', '<Cmd>RenderMarkdown buf_toggle<CR>' },
+    { 'n', '<Leader>tM', '<Cmd>RenderMarkdown toggle<CR>' }
+  )
+end
+
 return M
