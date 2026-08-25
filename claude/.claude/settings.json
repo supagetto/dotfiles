@@ -9,6 +9,11 @@
   },
   "permissions": {
     "deny": [
+      "Agent(Explore)",
+      "Agent(Plan)",
+      "Agent(claude-code-guide)",
+      "Agent(general-purpose)",
+      "Agent(statusline-setup)",
       "EnterPlanMode",
       "ExitPlanMode",
       "NotebookEdit",
@@ -23,6 +28,7 @@
     ]
   },
   "model": "sonnet",
+  "agent": "orchestrator",
   "disableBundledSkills": true,
   "disableRemoteControl": true,
   "disableWorkflows": true,
