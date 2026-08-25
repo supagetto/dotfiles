@@ -7,7 +7,26 @@
     "commit": "",
     "pr": ""
   },
+  "permissions": {
+    "deny": [
+      "EnterPlanMode",
+      "ExitPlanMode",
+      "NotebookEdit",
+      "PushNotification",
+      "RemoteTrigger",
+      "ReportFindings",
+      "ScheduleWakeup",
+      "AskUserQuestion",
+      "CronCreate",
+      "CronDelete",
+      "CronList"
+    ]
+  },
   "model": "sonnet",
+  "disableBundledSkills": true,
+  "disableRemoteControl": true,
+  "disableWorkflows": true,
+  "disableArtifact": true,
   "enabledPlugins": {
     "lua-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
