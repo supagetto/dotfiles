@@ -132,6 +132,22 @@ M.opts = function()
             end,
             mode = 't',
           },
+          resize_left = {
+            '<C-S-Left>',
+            function()
+              vim.cmd('stopinsert')
+              require('tmux').resize_left()
+            end,
+            mode = 't',
+          },
+          resize_right = {
+            '<C-S-Right>',
+            function()
+              vim.cmd('stopinsert')
+              require('tmux').resize_right()
+            end,
+            mode = 't',
+          },
           lazygit = {
             '<C-g>',
             function()
