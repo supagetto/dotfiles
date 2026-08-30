@@ -40,5 +40,10 @@
   },
   "effortLevel": "medium",
   "theme": "custom:lackluster",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "voiceEnabled": true,
+  "voice": {
+    "enabled": true,
+    "mode": "tap"
+  }
 }
