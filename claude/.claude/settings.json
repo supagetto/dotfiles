@@ -28,7 +28,6 @@
     ]
   },
   "model": "sonnet",
-  "agent": "orchestrator",
   "disableBundledSkills": true,
   "disableRemoteControl": true,
   "disableWorkflows": true,
@@ -39,11 +38,12 @@
     "claude-mem@thedotmack": true
   },
   "effortLevel": "medium",
-  "theme": "custom:lackluster",
-  "editorMode": "vim",
-  "voiceEnabled": true,
+  "agent": "orchestrator",
   "voice": {
     "enabled": true,
     "mode": "tap"
-  }
+  },
+  "theme": "custom:lackluster",
+  "editorMode": "vim",
+  "voiceEnabled": true
 }
