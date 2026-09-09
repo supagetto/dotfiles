@@ -38,7 +38,7 @@
     "claude-mem@thedotmack": true
   },
   "effortLevel": "medium",
-  "agent": "orchestrator",
+  "agent": "boss",
   "voice": {
     "enabled": true,
     "mode": "tap"
