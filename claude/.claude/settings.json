@@ -27,7 +27,7 @@
       "CronList"
     ]
   },
-  "model": "sonnet",
+  "model": "claude-opus-4-8",
   "disableBundledSkills": true,
   "disableRemoteControl": true,
   "disableWorkflows": true,
