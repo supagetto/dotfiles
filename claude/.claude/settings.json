@@ -38,6 +38,11 @@
     "claude-mem@thedotmack": true
   },
   "effortLevel": "medium",
+  "modelSettings": {
+    "claude-opus-4-8": {
+      "effortLevel": "medium"
+    }
+  },
   "agent": "boss",
   "voice": {
     "enabled": true,
