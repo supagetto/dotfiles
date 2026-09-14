@@ -3,6 +3,9 @@
     "graft": {
       "command": "graft",
       "args": ["mcp"]
+    },
+    "notion": {
+      "url": "https://mcp.notion.com/mcp"
     }
   }
 }
