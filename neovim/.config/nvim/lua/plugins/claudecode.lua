@@ -80,6 +80,10 @@ M.opts = function()
   return {
     focus_after_send = true,
     terminal_cmd = vim.fn.executable('headroom') == 1 and 'headroom wrap claude' or nil,
+    -- Blank TMUX so Claude Code emits raw OSC 52 instead of tmux DCS
+    -- passthrough. Its real parent here is Neovim's :terminal (libvterm),
+    -- which handles raw OSC 52; the wrapped form leaks as literal base64.
+    env = { TMUX = '' },
     terminal = {
       split_width_percentage = 0.4,
       snacks_win_opts = {
