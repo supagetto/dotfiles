@@ -39,6 +39,11 @@ __zsh::config::exports::xdg() {
   export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
 }
 
+__zsh::config::exports::headroom() {
+  export HEADROOM_EXCLUDE_TOOLS="mcp__slack__*"
+  launchctl setenv HEADROOM_EXCLUDE_TOOLS "${HEADROOM_EXCLUDE_TOOLS}"
+}
+
 () {
   __zsh::config::exports::xdg
   __zsh::config::exports::path
@@ -46,4 +51,5 @@ __zsh::config::exports::xdg() {
   __zsh::config::exports::editor
   __zsh::config::exports::zsh
   __zsh::config::exports::misc
+  __zsh::config::exports::headroom
 }
