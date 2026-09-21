@@ -24,7 +24,7 @@
       "CronList"
     ]
   },
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-4-6[1m]",
   "disableBundledSkills": true,
   "disableRemoteControl": true,
   "disableWorkflows": true,
@@ -36,7 +36,7 @@
   },
   "effortLevel": "medium",
   "modelSettings": {
-    "claude-opus-4-8": {
+    "claude-opus-4-6": {
       "effortLevel": "medium"
     }
   },
