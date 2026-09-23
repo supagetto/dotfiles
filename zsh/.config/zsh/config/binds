@@ -23,7 +23,11 @@ __zsh::config::binds::vi() {
 }
 
 __zsh::config::binds::paste() {
-  LBUFFER+="$(wl-paste --no-newline)"
+  if [[ "$OSTYPE" == darwin* ]]; then
+    LBUFFER+="$(pbpaste)"
+  else
+    LBUFFER+="$(wl-paste --no-newline)"
+  fi
 }
 
 () {
