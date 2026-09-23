@@ -57,7 +57,8 @@ local main = function()
     { 'i', '<A-j>', '<Esc><Cmd>m .+1<CR>==gi' },
     { 'i', '<A-k>', '<Esc><Cmd>m .-2<CR>==gi' },
     { 'x', '<A-j>', ":m '>+1<CR>gv=gv" },
-    { 'x', '<A-k>', ":m '<-2<CR>gv=gv" }
+    { 'x', '<A-k>', ":m '<-2<CR>gv=gv" },
+    { 'i', '<C-v>', '<C-r><C-p>+' }
   )
 
   -- ━ Indentation ━━━━━━━━━━━━━━━━━━━━━━━━━━
