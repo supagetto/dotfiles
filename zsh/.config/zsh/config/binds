@@ -18,8 +18,8 @@ __zsh::config::binds::autosuggestions() {
 
 __zsh::config::binds::vi() {
   bindkey -v
-  zle -N __zsh::config::binds::paste
-  bindkey -M viins "^V" __zsh::config::binds::paste
+  zle -N paste-clipboard __zsh::config::binds::paste
+  bindkey -M viins "^V" paste-clipboard
 }
 
 __zsh::config::binds::paste() {
