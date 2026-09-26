@@ -24,6 +24,10 @@ __zsh::config::aliases::misc() {
   if [[ -f /usr/lib/huiontablet/huiontablet.sh ]]; then
     alias huiontablet="/usr/lib/huiontablet/huiontablet.sh"
   fi
+
+  if command -v bluetui >/dev/null; then
+    alias bluetooth="bluetui"
+  fi
 }
 
 __zsh::config::aliases::general() {
