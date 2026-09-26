@@ -28,6 +28,10 @@ __zsh::config::aliases::misc() {
   if command -v bluetui >/dev/null; then
     alias bluetooth="bluetui"
   fi
+
+  if command -v wifitui >/dev/null; then
+    alias wifi="wifitui"
+  fi
 }
 
 __zsh::config::aliases::general() {
