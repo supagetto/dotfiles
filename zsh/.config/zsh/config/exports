@@ -44,6 +44,10 @@ __zsh::config::exports::headroom() {
   launchctl setenv HEADROOM_EXCLUDE_TOOLS "${HEADROOM_EXCLUDE_TOOLS}"
 }
 
+__zsh::config::exports::claude() {
+  export CLAUDE_CODE_TMUX_TRUECOLOR=1
+}
+
 () {
   __zsh::config::exports::xdg
   __zsh::config::exports::path
@@ -52,4 +56,5 @@ __zsh::config::exports::headroom() {
   __zsh::config::exports::zsh
   __zsh::config::exports::misc
   __zsh::config::exports::headroom
+  __zsh::config::exports::claude
 }
