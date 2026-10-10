@@ -40,11 +40,6 @@
     }
   },
   "agent": "boss",
-  "voice": {
-    "enabled": true,
-    "mode": "tap"
-  },
   "theme": "custom:lackluster",
-  "editorMode": "vim",
-  "voiceEnabled": true
+  "editorMode": "vim"
 }
