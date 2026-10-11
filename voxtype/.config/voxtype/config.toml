@@ -12,3 +12,6 @@ model = "parakeet-tdt-0.6b-v3-int8"
 
 [output]
 mode = "type"
+
+[output.notification]
+on_transcription = false
