@@ -5,6 +5,10 @@
     "pr": ""
   },
   "permissions": {
+    "allow": [
+      "mcp__slack",
+      "mcp__notion"
+    ],
     "deny": [
       "Agent(Explore)",
       "Agent(Plan)",
