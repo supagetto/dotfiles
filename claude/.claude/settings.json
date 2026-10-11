@@ -45,5 +45,9 @@
   },
   "agent": "boss",
   "theme": "custom:lackluster",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": ["Lollygagging ( ͡° ͜ʖ ͡°)"]
+  }
 }
