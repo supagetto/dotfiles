@@ -5,9 +5,7 @@
 engine = "parakeet"
 
 [hotkey]
-key = "RIGHTALT"
-mode = "push_to_talk"
-enabled = true
+enabled = false
 
 [parakeet]
 model = "parakeet-tdt-0.6b-v2-int8"
