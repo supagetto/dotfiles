@@ -10,6 +10,7 @@
 !*/.local/bin/brightness
 !*/.local/bin/color_picker
 !*/.local/bin/lib
+!*/.local/bin/dictate
 !*/.local/bin/resource_monitor
 !*/.local/bin/screenshot
 !*/.local/bin/volume
