@@ -4,13 +4,14 @@
 
 local voxtype = os.getenv('HOME') .. '/.cargo/bin/voxtype'
 local HOLD_THRESHOLD_SECS = 0.3
+local RIGHT_CTRL_KEYCODE = hs.keycodes.map.rightctrl
 
-local isFnDown = false
+local isRightCtrlDown = false
 local recordingStartedAtSecs = nil
 
 local function runVoxtype(args) hs.task.new(voxtype, nil, args):start() end
 
-local function onFnPressed()
+local function onRightCtrlPressed()
   local status = hs.execute(voxtype .. ' status'):gsub('%s+$', '')
 
   if status == 'recording' then
@@ -24,7 +25,7 @@ local function onFnPressed()
   recordingStartedAtSecs = hs.timer.secondsSinceEpoch()
 end
 
-local function onFnReleased()
+local function onRightCtrlReleased()
   if recordingStartedAtSecs == nil then return end
 
   local heldSecs = hs.timer.secondsSinceEpoch() - recordingStartedAtSecs
@@ -34,16 +35,18 @@ local function onFnReleased()
 end
 
 -- Global so it is not garbage-collected.
-fnWatcher = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(event)
-  local isFnNowDown = event:getFlags().fn == true
+rightCtrlWatcher = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(event)
+  if event:getKeyCode() ~= RIGHT_CTRL_KEYCODE then return false end
 
-  if isFnNowDown and not isFnDown then
-    onFnPressed()
-  elseif isFnDown and not isFnNowDown then
-    onFnReleased()
+  local isRightCtrlNowDown = event:getFlags().ctrl == true
+
+  if isRightCtrlNowDown and not isRightCtrlDown then
+    onRightCtrlPressed()
+  elseif isRightCtrlDown and not isRightCtrlNowDown then
+    onRightCtrlReleased()
   end
 
-  isFnDown = isFnNowDown
+  isRightCtrlDown = isRightCtrlNowDown
   return false
 end)
-fnWatcher:start()
+rightCtrlWatcher:start()
