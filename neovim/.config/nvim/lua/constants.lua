@@ -193,6 +193,7 @@ M.LANGUAGE_SERVERS = {
       },
     },
   },
+  marksman = {},
   mdx_analyzer = {},
   pyright = {
     settings = {
