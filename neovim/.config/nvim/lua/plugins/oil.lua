@@ -30,6 +30,7 @@ M.opts = function()
       ['<C-t>'] = false,
       ['<C-c>'] = false,
       ['<C-l>'] = false,
+      ['~'] = { 'actions.cd', opts = { scope = 'win' } },
       ['<Leader>y'] = function()
         require('oil.actions').yank_entry.callback({ modify = ':t:r' })
         vim.notify('Filename copied to clipboard.')
