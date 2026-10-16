@@ -25,7 +25,8 @@
       "AskUserQuestion",
       "CronCreate",
       "CronDelete",
-      "CronList"
+      "CronList",
+      "WebFetch"
     ]
   },
   "model": "claude-opus-5-5[1m]",
