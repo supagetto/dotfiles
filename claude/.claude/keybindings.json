@@ -1,1 +1,11 @@
-{}
+{
+  "bindings": [
+    {
+      "context": "Autocomplete",
+      "bindings": {
+        "ctrl+space": "autocomplete:accept",
+        "tab": null
+      }
+    }
+  ]
+}
