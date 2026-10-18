@@ -2,13 +2,16 @@
 # ┃ config ┃
 # ┗━━━━━━━━┛
 
-engine = "parakeet"
+engine = "whisper"
 
 [hotkey]
 enabled = false
 
 [parakeet]
-model = "parakeet-tdt-0.6b-v2-int8"
+model = "parakeet-tdt-0.6b-v3-int8"
+
+[whisper]
+model = "large-v3-turbo"
 
 [output]
 mode = "type"
@@ -16,59 +19,3 @@ mode = "type"
 [output.notification]
 on_transcription = false
 
-[text.replacements]
-# general
-"hyper land" = "Hyprland"
-"neo vim" = "Neovim"
-"dot files" = "dotfiles"
-# javascript / typescript
-"java script" = "JavaScript"
-"type script" = "TypeScript"
-"node js" = "Node.js"
-"next js" = "Next.js"
-"es lint" = "ESLint"
-"e s l" = "ESLint"
-"esl" = "ESLint"
-"e. s. lint" = "ESLint"
-"e s length" = "ESLint"
-"e as length" = "ESLint"
-"ts config" = "tsconfig"
-"package dot json" = "package.json"
-"dot env" = ".env"
-"use effect" = "useEffect"
-"jason" = "JSON"
-# claude
-"clod" = "Claude"
-"clawed" = "Claude"
-"cloud code" = "Claude Code"
-"claude code" = "Claude Code"
-"claude dot md" = "CLAUDE.md"
-"and tropic" = "Anthropic"
-"sub agent" = "subagent"
-# dotfiles tools
-"n vim" = "nvim"
-"tee mux" = "tmux"
-"t mux" = "tmux"
-"lazy git" = "lazygit"
-"f z f" = "fzf"
-"z shell" = "zsh"
-# dev terms
-"get hub" = "GitHub"
-"local host" = "localhost"
-"tail wind" = "Tailwind"
-"front end" = "frontend"
-"back end" = "backend"
-"a sync" = "async"
-"reg ex" = "regex"
-"mono repo" = "monorepo"
-"re base" = "rebase"
-"system d" = "systemd"
-"web socket" = "WebSocket"
-"sequel light" = "SQLite"
-"post gress" = "Postgres"
-"post gres" = "Postgres"
-"super base" = "Supabase"
-"vee test" = "Vitest"
-"tan stack" = "TanStack"
-"graph q l" = "GraphQL"
-"oh auth" = "OAuth"
