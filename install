@@ -1,0 +1,184 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly DOTFILES_URL="https://github.com/supagetto/dotfiles.git"
+readonly DOTFILES_DIR="${HOME}/repos/dotfiles"
+readonly PARU_URL="https://aur.archlinux.org/paru.git"
+readonly ZPLUG_URL="https://github.com/zplug/zplug"
+readonly ZPLUG_DIR="${HOME}/.local/share/.zplug"
+
+readonly PACKAGES=(
+  openssh-git less-git ripgrep-git nvm-git stow-git zsh-git tmux-git
+  alacritty-git hyprland-git hypridle-git hyprlock-git hyprpaper-git
+  hyprpicker-git brightnessctl-git pamixer-git zen-browser-git zoxide-git
+  fastfetch-git btop-git grimblast-git wl-clipboard-git neovim-git
+  tree-sitter-cli-git lazygit-git lsd-git trash-cli-git imv-git mpv-git
+  gimp-git wtype-git fzf-git github-cli-git wev-git noto-fonts-emoji-git
+  deno-git yt-dlp-git
+  voxtype-bin wifitui-bin bun-bin
+  ttf-sourcecodepro-nerd unzip jdk-openjdk kdenlive steam discord pipewire
+  pipewire-pulse pipewire-alsa pipewire-jack wireplumber gst-plugin-pipewire
+  libpulse iwd bluez bluez-utils bluetui power-profiles-daemon ufw
+  noto-fonts noto-fonts-cjk ttf-liberation otf-montserrat claude-code
+  google-cloud-cli thefuck python
+)
+
+readonly STOW_PACKAGES=(
+  alacritty btop claude cursor cursors fastfetch fontconfig git hyprland imv
+  lazygit mpv neovim scripts tmux voxtype wallpapers zsh
+)
+
+step() { printf '\n%s\n' "$*"; }
+
+run_with_spinner() {
+  local -r MESSAGE="$1"
+  shift
+
+  local -r LOG_PATH="$(mktemp)"
+  local -r FRAMES=("🕛" "🕐" "🕑" "🕒" "🕓" "🕔" "🕕" "🕖" "🕗" "🕘" "🕙" "🕚")
+
+  "$@" >"${LOG_PATH}" 2>&1 &
+  local -r PID=$!
+
+  local frame_index=0
+  while kill -0 "${PID}" 2>/dev/null; do
+    printf "\r%s %s" "${FRAMES[frame_index]}" "${MESSAGE}"
+    frame_index=$(((frame_index + 1) % ${#FRAMES[@]}))
+    sleep 0.1
+  done
+
+  printf "\r\033[K"
+
+  local status=0
+  wait "${PID}" || status=$?
+
+  if [[ "${status}" -ne 0 ]]; then
+    cat "${LOG_PATH}" >&2
+  fi
+
+  rm -f "${LOG_PATH}"
+
+  return "${status}"
+}
+
+enable_multilib() {
+  sudo sed -i \
+    '/^#\[multilib\]$/{s/^#//;n;s/^#Include/Include/}' \
+    /etc/pacman.conf
+}
+
+install_paru() {
+  command -v paru >/dev/null && return
+
+  local temp_dir
+  temp_dir="$(mktemp -d)"
+  run_with_spinner "🦀 Cloning paru" git clone "${PARU_URL}" "${temp_dir}/paru"
+  (cd "${temp_dir}/paru" && makepkg -si)
+  rm -rf "${temp_dir}"
+}
+
+clone_if_missing() {
+  local url="$1"
+  local directory="$2"
+
+  [[ -d "${directory}" ]] && return
+
+  mkdir -p "$(dirname "${directory}")"
+  rm -rf "${directory}.partial"
+  git clone "${url}" "${directory}.partial"
+  mv "${directory}.partial" "${directory}"
+}
+
+install_node() {
+  set +u
+  source /usr/share/nvm/init-nvm.sh
+  nvm install --lts
+}
+
+choose_voxtype_model() {
+  step "🎙️ Choosing voxtype model"
+  echo "1) 🦜 parakeet (fast on CPU)"
+  echo "2) 🐢 whisper large-v3-turbo"
+  echo "3) ⏭️ skip"
+
+  read -rp "🎙️ Model [1/2/3]: " VOXTYPE_MODEL_CHOICE
+
+  case "${VOXTYPE_MODEL_CHOICE}" in
+    1 | 2 | 3) ;;
+    *)
+      echo "❌ Invalid \`${VOXTYPE_MODEL_CHOICE}\` choice." >&2
+      return 1
+      ;;
+  esac
+}
+
+setup_voxtype() {
+  case "${VOXTYPE_MODEL_CHOICE}" in
+    1)
+      sudo voxtype setup onnx --enable
+      run_with_spinner "🦜 Downloading parakeet" \
+        voxtype setup --download --model parakeet-tdt-0.6b-v3-int8 \
+        --quiet --no-post-install
+
+      local env_file="${HOME}/.config/local/voxtype.env"
+      mkdir -p "$(dirname "${env_file}")"
+      grep -q '^VOXTYPE_ENGINE=' "${env_file}" 2>/dev/null ||
+        echo "VOXTYPE_ENGINE=parakeet" >>"${env_file}"
+      ;;
+    2)
+      run_with_spinner "🐢 Downloading whisper" \
+        voxtype setup --download --model large-v3-turbo \
+        --quiet --no-post-install
+      ;;
+    3)
+      echo "⏭️ Skipping voxtype model"
+      ;;
+  esac
+}
+
+stow_dotfiles() {
+  mkdir -p "${HOME}/.config/systemd/user"
+  (cd "${DOTFILES_DIR}" && stow "${STOW_PACKAGES[@]}")
+}
+
+main() {
+  choose_voxtype_model
+
+  step "📦 Enabling multilib and installing git + base-devel"
+  enable_multilib
+  sudo pacman -Syu --needed git base-devel
+
+  run_with_spinner "📥 Cloning dotfiles" \
+    clone_if_missing "${DOTFILES_URL}" "${DOTFILES_DIR}"
+
+  step "🦀 Installing paru"
+  install_paru
+
+  step "🧰 Installing packages"
+  paru -S --needed "${PACKAGES[@]}"
+
+  step "👥 Adding user to input group"
+  sudo usermod -aG input "${USER}"
+
+  step "⚙️ Enabling system services"
+  sudo systemctl enable --now iwd bluetooth power-profiles-daemon ufw
+
+  run_with_spinner "🔌 Installing zplug" \
+    clone_if_missing "${ZPLUG_URL}" "${ZPLUG_DIR}"
+
+  run_with_spinner "🟢 Installing Node LTS" install_node
+
+  setup_voxtype
+
+  run_with_spinner "🔗 Stowing dotfiles" stow_dotfiles
+
+  if [[ "$(getent passwd "${USER}" | cut -d: -f7)" != *zsh ]]; then
+    step "🐚 Setting zsh as default shell"
+    chsh -s "$(command -v zsh)"
+  fi
+
+  step "🎉 Done! Log out and back in to start zsh"
+}
+
+main "$@"
