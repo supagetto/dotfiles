@@ -4,7 +4,7 @@ Personal dotfiles — the dotfiles that are personal.
 
 <img src="./assets/cool.png" width="25%" />
 
-## Install
+## 📦 Install
 
 > [!WARNING]
 > Use at your own risk. I'm not responsible if your computer explodes.
@@ -15,7 +15,7 @@ Personal dotfiles — the dotfiles that are personal.
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/supagetto/dotfiles/main/install)"
 ```
 
-## Screens
+## 📸 Screens
 
 <img src="./assets/fastfetch.png" width="100%" />
 
