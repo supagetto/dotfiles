@@ -59,6 +59,13 @@ M.opts = function()
     { '%.git/', 'graft/', '%.serena/' }
   )
 
+  local rg_ignore_globs = {
+    '--glob=!**/node_modules/**',
+    '--glob=!**/.git/**',
+    '--glob=!**/graft/**',
+    '--glob=!**/.serena/**',
+  }
+
   return {
     telescope = {
       defaults = {
@@ -74,16 +81,17 @@ M.opts = function()
           '┘',
           '└',
         },
-        vimgrep_arguments = {
+        vimgrep_arguments = require('utils').concat({
           'rg',
           '--hidden',
+          '--follow',
           '--color=never',
           '--no-heading',
           '--with-filename',
           '--line-number',
           '--column',
           '--smart-case',
-        },
+        }, rg_ignore_globs),
         file_ignore_patterns = { '%.git/', 'graft/', '%.serena/' },
         mappings = {
           n = {
@@ -99,6 +107,11 @@ M.opts = function()
       pickers = {
         find_files = {
           hidden = true,
+          follow = true,
+          find_command = require('utils').concat(
+            { 'rg', '--files', '--color=never' },
+            rg_ignore_globs
+          ),
         },
         live_grep = {
           file_ignore_patterns = grep_ignore_patterns,
