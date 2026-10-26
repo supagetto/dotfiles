@@ -10,6 +10,7 @@
       "mcp__notion"
     ],
     "deny": [
+      "Agent(claude)",
       "Agent(Explore)",
       "Agent(Plan)",
       "Agent(claude-code-guide)",
