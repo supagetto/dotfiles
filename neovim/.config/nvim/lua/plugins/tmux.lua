@@ -28,4 +28,16 @@ M.opts = function()
   }
 end
 
+M.config = function(_, opts)
+  require('tmux').setup(opts)
+
+  -- tmux next-3.9 reports #{window_layout} as JSON, which tmux.nvim's
+  -- layout parser cannot read. Ask tmux for the pane edges instead.
+  local sides = { h = 'left', j = 'bottom', k = 'top', l = 'right' }
+  require('tmux.layout').is_border = function(direction)
+    local format = '#{pane_at_' .. sides[direction] .. '}'
+    return vim.trim(vim.fn.system({ 'tmux', 'display-message', '-p', format })) == '1'
+  end
+end
+
 return M
