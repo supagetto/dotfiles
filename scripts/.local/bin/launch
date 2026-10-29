@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+# ┏━━━━━━━━┓
+# ┃ launch ┃
+# ┗━━━━━━━━┛
+
+source "lib"
+
+print_usage() {
+  cat <<END
+Usage:
+  ${SCRIPT_NAME} <program> [args...]
+  ${SCRIPT_NAME} [option]
+
+Options:
+  -h, --help  Show usage.
+END
+}
+
+launch_program() {
+  if [[ "$#" -eq 0 ]]; then
+    lib::print_error "Missing program."
+    return 1
+  fi
+
+  if ! command -v "$1" &>/dev/null; then
+    lib::print_error "Program \`$1\` not found."
+    return 1
+  fi
+
+  setsid -f "$@" >/dev/null 2>&1 </dev/null
+}
+
+handle_option() {
+  case "$1" in
+    -h | --help)
+      if [[ "$#" -gt 1 ]]; then
+        lib::print_invalid_argument_error "$2"
+        return 1
+      fi
+
+      print_usage
+      return
+      ;;
+    *)
+      lib::print_error "Invalid \`$1\` option."
+      return 1
+      ;;
+  esac
+}
+
+main() {
+  if lib::is_option "$1"; then
+    handle_option "$@"
+    exit
+  fi
+
+  launch_program "$@"
+}
+
+main "$@"
