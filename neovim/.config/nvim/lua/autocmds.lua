@@ -50,6 +50,14 @@ local main = function()
           require('utils').set_buffer_option('indentexpr', "v:lua.require'nvim-treesitter'.indentexpr()")
         end,
       },
+    },
+    {
+      { 'FileType' },
+      {
+        group = require('utils').create_augroup('wrap-markdown'),
+        pattern = { 'markdown' },
+        callback = function() vim.opt_local.wrap = true end,
+      },
     }
   )
 end

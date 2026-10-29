@@ -44,7 +44,7 @@ local main = function()
     { 'timeoutlen', 500 },
     { 'undofile', true },
     { 'updatetime', 250 },
-    { 'wrap', true }
+    { 'wrap', false }
   )
 end
 
