@@ -22,6 +22,8 @@ local main = function()
   hl.bind('XF86AudioRaiseVolume', hl.dsp.exec_cmd('volume increase 2%'), { locked = true, repeating = true })
   hl.bind('XF86AudioMute', hl.dsp.exec_cmd('volume mute'), { locked = true })
   hl.bind('XF86AudioMicMute', hl.dsp.exec_cmd('volume mute -i'), { locked = true })
+  hl.bind('SHIFT + XF86AudioLowerVolume', hl.dsp.exec_cmd('volume decrease -i 2%'), { locked = true, repeating = true })
+  hl.bind('SHIFT + XF86AudioRaiseVolume', hl.dsp.exec_cmd('volume increase -i 2%'), { locked = true, repeating = true })
 
   -- Screenshot
   hl.bind('Print', hl.dsp.exec_cmd('screenshot area'))
