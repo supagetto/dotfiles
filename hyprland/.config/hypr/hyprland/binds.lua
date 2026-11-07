@@ -52,6 +52,15 @@ local main = function()
   hl.bind('SUPER + ALT + K', hl.dsp.window.move({ direction = 'up' }))
   hl.bind('SUPER + ALT + L', hl.dsp.window.move({ direction = 'right' }))
 
+  -- Resize by 2% of the active monitor (measured at config load)
+  local monitor = hl.get_active_monitor() or { width = 1920, height = 1200 }
+  local step_x = math.floor(monitor.width * 0.02)
+  local step_y = math.floor(monitor.height * 0.02)
+  hl.bind('SUPER + SHIFT + H', hl.dsp.window.resize({ x = -step_x, y = 0, relative = true }), { repeating = true })
+  hl.bind('SUPER + SHIFT + J', hl.dsp.window.resize({ x = 0, y = step_y, relative = true }), { repeating = true })
+  hl.bind('SUPER + SHIFT + K', hl.dsp.window.resize({ x = 0, y = -step_y, relative = true }), { repeating = true })
+  hl.bind('SUPER + SHIFT + L', hl.dsp.window.resize({ x = step_x, y = 0, relative = true }), { repeating = true })
+
   -- ━ Workspaces ━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   -- Move to a workspace
