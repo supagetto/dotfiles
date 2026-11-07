@@ -26,7 +26,7 @@ readonly PACKAGES=(
 
 readonly STOW_PACKAGES=(
   alacritty btop claude cursor cursors fastfetch fontconfig git hyprland imv
-  lazygit mpv neovim scripts tmux voxtype wallpapers zsh
+  lazygit mpv neovim pipewire scripts tmux voxtype wallpapers zsh
 )
 
 step() { printf '\n%s\n' "$*"; }
