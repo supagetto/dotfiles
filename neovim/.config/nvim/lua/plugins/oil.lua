@@ -53,12 +53,12 @@ M.opts = function()
         if not filepath then return end
 
         if require('utils').is_matching_any_pattern(require('constants').PATTERNS.IMAGE, filepath) then
-          require('utils').execute(string.format('%s %s', require('constants').APPLICATION.IMAGE_VIEWER, filepath))
+          require('utils').execute(string.format('%s %s', require('constants').APPLICATION.IMAGE_VIEWER, vim.fn.shellescape(filepath)))
           return
         end
 
         if require('utils').is_matching_any_pattern(require('constants').PATTERNS.VIDEO, filepath) then
-          require('utils').execute(string.format('%s %s', require('constants').APPLICATION.VIDEO_PLAYER, filepath))
+          require('utils').execute(string.format('%s %s', require('constants').APPLICATION.VIDEO_PLAYER, vim.fn.shellescape(filepath)))
           return
         end
 
