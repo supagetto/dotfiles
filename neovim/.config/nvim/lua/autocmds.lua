@@ -26,7 +26,7 @@ local main = function()
       { 'TextYankPost' },
       {
         group = require('utils').create_augroup('highlight-on-yank'),
-        callback = function() vim.highlight.on_yank() end,
+        callback = function() vim.hl.hl_op() end,
       },
     },
     {
