@@ -16,10 +16,14 @@ M.init = function()
   require('utils').set_keymaps(
     { 'n', '-', require('oil').open },
     { 'n', '_', function() require('oil').open(vim.fn.getcwd()) end },
-    { 'n', '<Leader>ow', function()
-      local path = vim.fn.expand('~/.workbench')
-      if vim.fn.isdirectory(path) == 1 then require('oil').toggle_float(path) end
-    end }
+    {
+      'n',
+      '<Leader>ow',
+      function()
+        local path = vim.fn.expand('~/.workbench')
+        if vim.fn.isdirectory(path) == 1 then require('oil').toggle_float(path) end
+      end,
+    }
   )
 end
 
@@ -66,12 +70,16 @@ M.opts = function()
         if not filepath then return end
 
         if require('utils').is_matching_any_pattern(require('constants').PATTERNS.IMAGE, filepath) then
-          require('utils').execute(string.format('%s %s', require('constants').APPLICATION.IMAGE_VIEWER, vim.fn.shellescape(filepath)))
+          require('utils').execute(
+            string.format('%s %s', require('constants').APPLICATION.IMAGE_VIEWER, vim.fn.shellescape(filepath))
+          )
           return
         end
 
         if require('utils').is_matching_any_pattern(require('constants').PATTERNS.VIDEO, filepath) then
-          require('utils').execute(string.format('%s %s', require('constants').APPLICATION.VIDEO_PLAYER, vim.fn.shellescape(filepath)))
+          require('utils').execute(
+            string.format('%s %s', require('constants').APPLICATION.VIDEO_PLAYER, vim.fn.shellescape(filepath))
+          )
           return
         end
 
