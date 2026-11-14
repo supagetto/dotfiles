@@ -15,7 +15,11 @@ M.lazy = false
 M.init = function()
   require('utils').set_keymaps(
     { 'n', '-', require('oil').open },
-    { 'n', '_', function() require('oil').open(vim.fn.getcwd()) end }
+    { 'n', '_', function() require('oil').open(vim.fn.getcwd()) end },
+    { 'n', '<Leader>ow', function()
+      local path = vim.fn.expand('~/.workbench')
+      if vim.fn.isdirectory(path) == 1 then require('oil').toggle_float(path) end
+    end }
   )
 end
 
@@ -28,8 +32,17 @@ M.opts = function()
       ['<C-s>'] = false,
       ['<C-h>'] = false,
       ['<C-t>'] = false,
-      ['<C-c>'] = false,
+      ['<C-c>'] = function()
+        if vim.w.is_oil_win then require('oil').close() end
+      end,
       ['<C-l>'] = false,
+      ['q'] = function()
+        if vim.w.is_oil_win then return require('oil').close() end
+        vim.api.nvim_feedkeys('q', 'n', false)
+      end,
+      ['<Esc>'] = function()
+        if vim.w.is_oil_win then require('oil').close() end
+      end,
       ['~'] = { 'actions.cd', opts = { scope = 'win' } },
       ['<Leader>y'] = function()
         require('oil.actions').yank_entry.callback({ modify = ':t:r' })
@@ -84,6 +97,12 @@ M.opts = function()
 
         return false
       end,
+    },
+    float = {
+      padding = 0,
+      max_width = 80,
+      max_height = 12,
+      border = 'single',
     },
     ssh = {
       border = 'single',
