@@ -46,11 +46,6 @@
     ]
   },
   "effortLevel": "medium",
-  "modelSettings": {
-    "claude-opus-4-6": {
-      "effortLevel": "medium"
-    }
-  },
   "agent": "boss",
   "theme": "custom:lackluster",
   "editorMode": "vim",
