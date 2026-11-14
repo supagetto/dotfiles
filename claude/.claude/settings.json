@@ -39,6 +39,12 @@
     "lua-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true
   },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "Lollygagging ( ͡° ͜ʖ ͡°)"
+    ]
+  },
   "effortLevel": "medium",
   "modelSettings": {
     "claude-opus-4-6": {
@@ -48,9 +54,5 @@
   "agent": "boss",
   "theme": "custom:lackluster",
   "editorMode": "vim",
-  "spinnerVerbs": {
-    "mode": "replace",
-    "verbs": ["Lollygagging ( ͡° ͜ʖ ͡°)"]
-  },
   "skipDangerousModePermissionPrompt": true
 }
